@@ -168,7 +168,7 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
    * `yticks() 命令 <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.yticks>`_
    * `Tick 容器 <http://matplotlib.sourceforge.net/users/artists.html#axis-container>`_
    * `坐标轴位置和格式
-   <http://matplotlib.sourceforge.net/api/ticker_api.html>`_
+   <http://matplotlib.sourceforge.net/api/ticker_api.html>`_  
 
 
 .. image:: figures/exercice_5.png
