@@ -194,6 +194,7 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
    * `yticks() command <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.yticks>`_
    * `set_xticklabels() <http://matplotlib.sourceforge.net/api/axes_api.html?#matplotlib.axes.Axes.set_xticklabels>`_
    * `set_yticklabels() <http://matplotlib.sourceforge.net/api/axes_api.html?#matplotlib.axes.Axes.set_yticklabels>`_
+   
 
 .. image:: figures/exercice_6.png
    :align: right
