@@ -1,11 +1,11 @@
 ===================
-Matplotlib tutorial
+Matplotlib 指南
 ===================
 
 
-------------------
-Nicolas P. Rougier
-------------------
+------------------------------------------------
+作者 Nicolas P. Rougier 翻译 Sasasu
+------------------------------------------------
 
 .. image:: https://zenodo.org/badge/doi/10.5281/zenodo.28747.png
    :target: http://dx.doi.org/10.5281/zenodo.28747
@@ -14,60 +14,44 @@ Nicolas P. Rougier
    :local:
    :depth: 1
 
-Sources are available from
+源代码在此处
 `github <https://github.com/rougier/matplotlib-tutorial>`_
 
-All code and material is licensed under a `Creative Commons
-Attribution-ShareAlike 4.0
+所有的代码及素材遵守 `Creative Commons Attribution-ShareAlike 4.0 协议
 <http://creativecommons.org/licenses/by-sa/4.0>`_.
 
 
-Tutorial can be read at http://www.labri.fr/perso/nrougier/teaching/matplotlib/matplotlib.html
+本指南可在此处阅读 http://www.labri.fr/perso/nrougier/teaching/matplotlib/matplotlib.html
 
-Make sure to also read `Ten simple rules for better figures <http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833>`_, N.P. Rougier, M. Droettboom & P. Bourne, Plos Computational Biology 10(9): e1003833. doi:10.1371/journal.pcbi.1003833.
+请一定也读一下 `为了更好的设计而生的十个简单规则(英文) <http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833>`_, N.P. Rougier, M. Droettboom & P. Bourne, Plos Computational Biology 10(9): e1003833. doi:10.1371/journal.pcbi.1003833.
 
 
-See also:
+另请参阅:
  * `Numpy tutorial <http://www.labri.fr/perso/nrougier/teaching/numpy/numpy.html>`_
  * `100 Numpy exercices <http://www.labri.fr/perso/nrougier/teaching/numpy.100/index.html>`_
 
 
-Introduction
+简介
 ============
 
-matplotlib is probably the single most used Python package for 2D-graphics. It
-provides both a very quick way to visualize data from Python and
-publication-quality figures in many formats.  We are going to explore
-matplotlib in interactive mode covering most common cases.
+Matplotlib大概是最常用的Pyrhon 2D绘图库。它提供从Python和其他数据里快速创建可视化图像的方法。我们将要探索matplotlib在交互模式下的常见用法。
 
-IPython and the pylab mode
+IPython 和 pylab 模式
 --------------------------
 
-`IPython <http://ipython.org/>`_ is an enhanced interactive Python shell that
-has lots of interesting features including named inputs and outputs, access to
-shell commands, improved debugging and many more. When we start it with the
-command line argument -pylab (--pylab since IPython version 0.12), it allows
-interactive matplotlib sessions that have Matlab/Mathematica-like functionality.
+`IPython <http://ipython.org/>`_是一个增强的Python交互式shell,它有很多有趣的功能,包括命名输入和输出,访问shell命令,改进的调试方式和许多其他的功能。当我们使用参数 `-pylab` (IPython版本大于0.12时请使用 `--pylab` )启动后，它将允许与matplotlib会话交互并提供类似Matlab/Mathematica的功能
 
 pyplot
 ------
 
-pyplot provides a convenient interface to the matplotlib object-oriented
-plotting library. It is modeled closely after Matlab(TM). Therefore, the
-majority of plotting commands in pyplot have Matlab(TM) analogs with similar
-arguments. Important commands are explained with interactive examples.
+pyplot为matplotlib提供了一个方便的面向对象的绘图接口，它的风格非常像Matlab(TM)。此外大多数pyplot的绘图命令与Matlab(TM)有着类似的参数。重要的命令将会用交互式的例子介绍
 
 
-
-
-Simple plot
+简单的图像
 ===========
 
-In this section, we want to draw the cosine and sine functions on the same
-plot. Starting from the default settings, we'll enrich the figure step by step
-to make it nicer.
-
-First step is to get the data for the sine and cosine functions:
+在本章中我们将要在一个简单的画板上画一个cosine和sine函数。从默认的参数开始，我们将一步一步的完善它。
+第一步是从sine和cosine函数中获取数据：
 
 ::
 
@@ -77,34 +61,31 @@ First step is to get the data for the sine and cosine functions:
    C,S = np.cos(X), np.sin(X)
 
 
-X is now a numpy array with 256 values ranging from -π to +π (included). C is
-the cosine (256 values) and S is the sine (256 values).
+X 现在是有着256个变量，范围为从-π 到 +π(包含)的numpy数组。
+C 是 cosine 函数(256个变量)，S是 sine 函数(256个变量)。
 
-To run the example, you can download each of the examples and run it using::
+为了演示这个例子，你可以下载每一个例子并用如下命令运行他
+
+::
 
     $ python exercice_1.py
 
-You can get source for each step by clicking on the corresponding figure.
+你可以点击每一步对应的图像来获取代码。
 
-
-Using defaults
+使用默认的参数
 --------------
 
-.. admonition:: Documentation
+.. admonition:: 文档
 
-   * `plot tutorial <http://matplotlib.sourceforge.net/users/pyplot_tutorial.html>`_
-   * `plot() command <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.plot>`_
+   * `plot 指南 <http://matplotlib.sourceforge.net/users/pyplot_tutorial.html>`_
+   * `plot() 指令 <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.plot>`_
 
 .. image:: figures/exercice_1.png
    :align: right
    :target: scripts/exercice_1.py
 
-Matplotlib comes with a set of default settings that allow customizing all
-kinds of properties. You can control the defaults of almost every property in
-matplotlib: figure size and dpi, line width, color and style, axes, axis and
-grid properties, text and font properties and so on. While matplotlib defaults
-are rather good in most cases, you may want to modify some properties for
-specific cases.
+
+Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控制几乎所有的属性，比如图的大小和dpi,线宽,颜色和风格,坐标轴和网格属性,文本和字体属性等等。虽然matplotlib的默认属性在大部分情况下是比较好的，但你也许为了一些特殊的场合改变某些参数。
 
 
 .. include:: scripts/exercice_1.py
@@ -112,45 +93,38 @@ specific cases.
    :start-line: 4
 
 
-Instantiating defaults
+默认实例
 ----------------------
 
-.. admonition:: Documentation
+.. admonition:: 文档
 
-   *  `Customizing matplotlib <http://matplotlib.sourceforge.net/users/customizing.html>`_
+   *  `定制 matplotlib <http://matplotlib.sourceforge.net/users/customizing.html>`_
 
 .. image:: figures/exercice_2.png
    :align: right
    :target: scripts/exercice_2.py
 
 
-In the script below, we've instantiated (and commented) all the figure settings
-that influence the appearance of the plot. The settings have been explicitly
-set to their default values, but now you can interactively play with the values
-to explore their affect (see `Line properties`_ and `Line styles`_ below).
+在下面的脚本中,我们将实例化(并介绍)所有影响图外观的参数。这些参数被显式的设定成初始值，但你现在可以交互式的改变这些参数并观察它们起得作用。(参见下面的 `线属性` 和 `线风格`)。
 
 .. include:: scripts/exercice_2.py
    :code: python
    :start-line: 4
-             
 
 
-Changing colors and line widths
+改变颜色和线的宽度
 --------------------------------
 
-.. admonition:: Documentation
+.. admonition:: 文档
 
-   * `Controlling line properties <http://matplotlib.sourceforge.net/users/pyplot_tutorial.html#controlling-line-properties>`_
+   * `控制线的属性 <http://matplotlib.sourceforge.net/users/pyplot_tutorial.html#controlling-line-properties>`_
    * `Line API <http://matplotlib.sourceforge.net/api/artist_api.html#matplotlib.lines.Line2D>`_
 
 .. image:: figures/exercice_3.png
    :align: right
    :target: scripts/exercice_3.py
 
-First step, we want to have the cosine in blue and the sine in red and a
-slightly thicker line for both of them. We'll also slightly alter the figure
-size to make it more horizontal.
-
+第一步，我们想要让cosine是蓝色sine是红色，并用稍微粗点的线标出他们。 我们也会稍微改变图的大小,使之更水平(horizontal)。
 
 ::
 
@@ -162,22 +136,20 @@ size to make it more horizontal.
 
 
 
-Setting limits
+设置边界
 --------------
 
-.. admonition:: Documentation
+.. admonition:: 文档
 
-   * `xlim() command <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.xlim>`_
-   * `ylim() command <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.ylim>`_
+   * `xlim() 命令 <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.xlim>`_
+   * `ylim() 命令 <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.ylim>`_
 
 
 .. image:: figures/exercice_4.png
    :align: right
    :target: scripts/exercice_4.py
 
-Current limits of the figure are a bit too tight and we want to make some space
-in order to clearly see all data points.
-
+当前的上下界对于这张图来说有点太小了，我们把他弄大点来看清楚所有的数据点。
 ::
 
    ...
@@ -187,25 +159,23 @@ in order to clearly see all data points.
 
 
 
-Setting ticks
+设置坐标轴单位长度
 -------------
 
-.. admonition:: Documentation
+.. admonition:: 文档
 
-   * `xticks() command <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.xticks>`_
-   * `yticks() command <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.yticks>`_
-   * `Tick container <http://matplotlib.sourceforge.net/users/artists.html#axis-container>`_
-   * `Tick locating and formatting <http://matplotlib.sourceforge.net/api/ticker_api.html>`_
+   * `xticks() 命令 <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.xticks>`_
+   * `yticks() 命令 <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.yticks>`_
+   * `Tick 容器 <http://matplotlib.sourceforge.net/users/artists.html#axis-container>`_
+   * `坐标轴位置和格式
+    <http://matplotlib.sourceforge.net/api/ticker_api.html>`_
 
 
 .. image:: figures/exercice_5.png
    :align: right
    :target: scripts/exercice_5.py
 
-Current ticks are not ideal because they do not show the interesting values
-(+/-π,+/-π/2) for sine and cosine. We'll change them such that they show only
-these values.
-
+当前的坐标轴并不理想，因为他们不为sine和cosine显示有意义的值(+/-π,+/-π/2)，我们将改变它们，让它们只显示这些值。
 ::
 
    ...
@@ -215,10 +185,10 @@ these values.
 
 
 
-Setting tick labels
+设置坐标轴显示单位
 -------------------
 
-.. admonition:: Documentation
+.. admonition:: 文档
 
    * `Working with text <http://matplotlib.sourceforge.net/users/index_text.html>`_
    * `xticks() command <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.xticks>`_
@@ -230,11 +200,7 @@ Setting tick labels
    :align: right
    :target: scripts/exercice_6.py
 
-Ticks are now properly placed but their label is not very explicit. We could
-guess that 3.142 is π but it would be better to make it explicit. When we set
-tick values, we can also provide a corresponding label in the second argument
-list. Note that we'll use latex to allow for nice rendering of the label.
-
+现在坐标轴刻度被正确的设置了，但他们的单位并不是很明确。我们可以猜想3.142是π但让它直接显示π会更加明确。在我们设置坐标轴刻度时可以同时在第二个参数列表里提供对应的单位。注意：我们将使用LaTeX来更好的描述单位。
 
 ::
 
@@ -248,10 +214,10 @@ list. Note that we'll use latex to allow for nice rendering of the label.
 
 
 
-Moving spines
+移动脊(Spines)
 -------------
 
-.. admonition:: Documentation
+.. admonition:: 文档
 
    * `Spines <http://matplotlib.sourceforge.net/api/spines_api.html#matplotlib.spines>`_
    * `Axis container <http://matplotlib.sourceforge.net/users/artists.html#axis-container>`_
@@ -261,12 +227,7 @@ Moving spines
    :align: right
    :target: scripts/exercice_7.py
 
-Spines are the lines connecting the axis tick marks and noting the boundaries
-of the data area. They can be placed at arbitrary positions and until now, they
-were on the border of the axis. We'll change that since we want to have them in
-the middle. Since there are four of them (top/bottom/left/right), we'll discard
-the top and right by setting their color to none and we'll move the bottom and
-left ones to coordinate 0 in data space coordinates.
+脊(Spines)是连接轴刻度和提示边界的线。它们可以被放置在任意的位置，现在它们在边界上。我们将把它放到中心。因为有四个脊（顶部/底部/左边/右边），我们将通过设置颜色为"none"来隐藏他们，同时我们将移动底部和左边的两个到坐标为0的位置。
 
 ::
 
@@ -282,11 +243,11 @@ left ones to coordinate 0 in data space coordinates.
 
 
 
-Adding a legend
+添加图例
 ---------------
 
 
-.. admonition:: Documentation
+.. admonition:: 文档
 
    * `Legend guide <http://matplotlib.sourceforge.net/users/legend_guide.html>`_
    * `legend() command <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.legend>`_
@@ -296,10 +257,7 @@ Adding a legend
    :align: right
    :target: scripts/exercice_8.py
 
-Let's add a legend in the upper left corner. This only requires adding the
-keyword argument label (that will be used in the legend box) to the plot
-commands.
-
+让我们在左上角添加图例。这止血药添加一个标签关键字(它在图例框中显示)到plot命令。
 
 ::
 
@@ -312,10 +270,10 @@ commands.
 
 
 
-Annotate some points
+添加注释点
 --------------------
 
-.. admonition:: Documentation
+.. admonition:: 文档
 
    * `Annotating axis <http://matplotlib.sourceforge.net/users/annotations_guide.html>`_
    * `annotate() command <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.annotate>`_
@@ -324,11 +282,7 @@ Annotate some points
    :align: right
    :target: scripts/exercice_9.py
 
-Let's annotate some interesting points using the annotate command. We chose the
-2π/3 value and we want to annotate both the sine and the cosine. We'll first
-draw a marker on the curve as well as a straight dotted line. Then, we'll use
-the annotate command to display some text with an arrow.
-
+让我们使用注解命令来注释一些有趣的点。我们选择2π/3，并想同时注释sine和cosine。我们首先在曲线上做一些标记并画一条虚线。然后使用注释命令来显示一些文本和箭头。
 
 ::
 
@@ -354,10 +308,10 @@ the annotate command to display some text with an arrow.
 
 
 
-Devil is in the details
-------------------------
+恶魔藏在细节中(Devil is in the details)
+---------------------------------------
 
-.. admonition:: Documentation
+.. admonition:: 文档
 
    * `Artists <http://matplotlib.sourceforge.net/api/artist_api.html>`_
    * `BBox <http://matplotlib.sourceforge.net/api/artist_api.html#matplotlib.text.Text.set_bbox>`_
@@ -366,11 +320,7 @@ Devil is in the details
    :align: right
    :target: scripts/exercice_10.py
 
-The tick labels are now hardly visible because of the blue and red lines. We can
-make them bigger and we can also adjust their properties such that they'll be
-rendered on a semi-transparent white background. This will allow us to see both
-the data and the labels.
-
+因为蓝色和红色的线。坐标轴现在很难被看见。我们可以让坐标轴更大并调整他们的属性让他们有一个半透明的白色背景，这回让我们更清楚的看见坐标轴上的数据。
 
 ::
 
@@ -383,58 +333,40 @@ the data and the labels.
 
 
 
-Figures, Subplots, Axes and Ticks
-=================================
+图(Figures), (子坐标)Subplots, 轴(Axes) 和 Ticks
+====================================================
 
-So far we have used implicit figure and axes creation. This is handy for fast
-plots. We can have more control over the display using figure, subplot, and
-axes explicitly. A figure in matplotlib means the whole window in the user
-interface. Within this figure there can be subplots. While subplot positions
-the plots in a regular grid, axes allows free placement within the figure. Both
-can be useful depending on your intention. We've already worked with figures
-and subplots without explicitly calling them. When we call plot, matplotlib
-calls gca() to get the current axes and gca in turn calls gcf() to get the
-current figure. If there is none it calls figure() to make one, strictly
-speaking, to make a subplot(111). Let's look at the details.
+到目前为止，我们已经使用隐式图和轴的创建(implicit figure and axes creation)来快速的绘图，但我们能通过figure, subplot, 和 axes explicitly进一步控制绘图。figures 在matplotlib代表着用户界面里的整个窗口，figures 里可以有把其他坐标限定在常规坐标里的子坐标，轴可以在图中的任意位置。根据你的意图，这都是十分有用的。我们已经在没有正式称呼使用 figures 和 subplots 的情况下使用了他们。当我们调用plot,matplotlib会调用gca()来获取当前轴(axes)，同时gca调用gcf()来获取当前figure，如果没有figure，它便会调用figure()来创建一个，严格地说是创建一个subplot(111)。让我们来看看细节。
 
 Figures
 -------
 
-A figure is the windows in the GUI that has "Figure #" as title. Figures
-are numbered starting from 1 as opposed to the normal Python way starting
-from 0. This is clearly MATLAB-style.  There are several parameters that
-determine what the figure looks like:
+figure是一个有着“Figure #”的GUI窗口。figures从1开始编号，而不是像Python一样从0开始。这正式MATLAB风格。这是几个确定figure的样子的参数
 
 ==============  ======================= ============================================
-Argument        Default                 Description
+参数               默认值                     解释
 ==============  ======================= ============================================
-num             1                       number of figure
-figsize         figure.figsize          figure size in in inches (width, height)
-dpi             figure.dpi              resolution in dots per inch
-facecolor       figure.facecolor        color of the drawing background
-edgecolor       figure.edgecolor        color of edge around the drawing background
-frameon         True                    draw figure frame or not
+num             1                       figure的编号
+figsize         figure.figsize          figure的大小(宽，高，单位英尺)
+dpi             figure.dpi              每英尺内的像素点
+facecolor       figure.facecolor        背景色
+edgecolor       figure.edgecolor        边缘的颜色 background
+frameon         True                    是否有边界
 ==============  ======================= ============================================
 
-The defaults can be specified in the resource file and will be used most of the
-time. Only the number of the figure is frequently changed.
+默认值可以在资源文件中指定，大部分时候都会使用默认值。只有figure的数量经常改变。
 
-When you work with the GUI you can close a figure by clicking on the x in the
-upper right corner. But you can close a figure programmatically by calling
-close. Depending on the argument it closes (1) the current figure (no
-argument), (2) a specific figure (figure number or figure instance as
-argument), or (3) all figures (all as argument).
+当你使用GUI可以关闭图通过点击右上角的x。但是你可以关闭图编程通过调用关闭。根据论证它关闭(1)当前图(无参数),(2)一个特定的图(图号或图实例作为参数),或(3)所有数据(所有作为参数)。
+当你使用GUI时你可以通过点击右上角X来关闭figure，但你也可以编程调用函数来关闭。这取决于closes的参数，closes()将会关闭当前figure,closes(#)将会关闭特定序号的figure,closes(all)将会关闭所有figure
 
-As with other objects, you can set figure properties with the set_something methods.
+与其他对象一样,你可以设置图的属性与set_something方法。
 
 
 Subplots
 --------
 
-With subplot you can arrange plots in a regular grid. You need to specify the
-number of rows and columns and the number of the plot. Note that the `gridspec
-<http://matplotlib.sourceforge.net/users/gridspec.html>`_ command is a more
-powerful alternative.
+通过subplots，你可以把其他坐标限定在常规坐标里。你需要指定行数和列数，注意`gridspec
+<http://matplotlib.sourceforge.net/users/gridspec.html>`_ 命令是一个更强大的候选
 
 .. image:: figures/subplot-horizontal.png
    :target: scripts/subplot-horizontal.py
@@ -450,9 +382,7 @@ powerful alternative.
 Axes
 ----
 
-Axes are very similar to subplots but allow placement of plots at any location
-in the figure. So if we want to put a smaller plot inside a bigger one we do
-so with axes.
+axes非常类似于subplots，但axes允许把plots放置在figure的任何位置。所以如果我们想把一个小的坐标放在大坐标里，我们应该用axes
 
 .. image:: figures/axes.png
    :target: scripts/axes.py
@@ -463,19 +393,12 @@ so with axes.
 Ticks
 -----
 
-Well formatted ticks are an important part of publishing-ready
-figures. Matplotlib provides a totally configurable system for ticks. There are
-tick locators to specify where ticks should appear and tick formatters to give
-ticks the appearance you want. Major and minor ticks can be located and
-formatted independently from each other. Per default minor ticks are not shown,
-i.e. there is only an empty list for them because it is as NullLocator (see
-below).
+被良好格式化的坐标轴是准备发布(publishing-ready)的figures的重要的一部分。Matplotlib为坐标轴提供了一个完全可配置的系统。tick定位器(tick locators)是用来指定ticks应该在哪里出现，tick格式化器(tick formatters)则是让ticks拥有你希望的外观。主要和次要的ticks可以单独指定位置和格式化。每一个默认的次要ticks不会被显示，即使只有一个空的列表，因为他们是NullLocator(见下文)
 
-Tick Locators
-.............
+tick定位器(Tick Locators)
+..........................
 
-There are several locators for different kind of requirements:
-
+这是为了应对不同需求的几种定位器:
 
 .. list-table::
    :widths: 20 70
@@ -486,27 +409,27 @@ There are several locators for different kind of requirements:
 
 
    * - ``NullLocator``
-     - No ticks.
+     - 没有 ticks.
 
        .. image:: figures/ticks-NullLocator.png
-     
+
    * - ``IndexLocator``
-     - Place a tick on every multiple of some base number of points plotted.
+     - 在每一个点的基础上绘制一个刻度。
 
        .. image:: figures/ticks-IndexLocator.png
 
    * - ``FixedLocator``
-     - Tick locations are fixed.
+     - Tick 的位置是固定的。
 
        .. image:: figures/ticks-FixedLocator.png
 
    * - ``LinearLocator``
-     - Determine the tick locations.
+     - 每隔一个间隔放置一个 Tick
 
        .. image:: figures/ticks-LinearLocator.png
 
    * - ``MultipleLocator``
-     - Set a tick on every integer that is multiple of some base.
+     - 每隔单位间隔放置一个 Tick
 
        .. image:: figures/ticks-MultipleLocator.png
 
@@ -520,22 +443,15 @@ There are several locators for different kind of requirements:
 
        .. image:: figures/ticks-LogLocator.png
 
-All of these locators derive from the base class matplotlib.ticker.Locator.
-You can make your own locator deriving from it. Handling dates as ticks can be
-especially tricky. Therefore, matplotlib provides special locators in
-matplotlib.dates.
-
+所有这些定位器从基类派生matplotlib.ticker.Locator。你可以让你自己的定位源于它。处理日期蜱虫可能特别棘手。因此,在matplotlib.dates matplotlib提供特殊的定位器。
+所有的定位器都是从基类matplotlib.ticker.Locator派生。你可以自己制作定位器。使用ticker来处理日期数据可能尤为棘手。因此，matplotlib在matplotlib.dates里提供特殊的定位器。
 
 Animation
 =========
 
-For quite a long time, animation in matplotlib was not an easy task and was
-done mainly through clever hacks. However, things have started to change since
-version 1.1 and the introduction of tools for creating animation very
-intuitively, with the possibility to save them in all kind of formats (but don't
-expect to be able to run very complex animation at 60 fps though).
+在很长的一段时间里，动画在matplotlib并不是一件容易的事，完成动画需要高超的hacks技巧。但1.1版本提供了一些工具来使创造动画变得非常直观。现在能以各种方式来保存动画(但不要指望以60fps来运行非常复杂的动画)
 
-.. admonition:: Documentation
+.. admonition:: 文档
 
    *  See `Animation <http://matplotlib.org/api/animation_api.html>`_
 
@@ -563,7 +479,7 @@ First step is to create a blank figure:
    # New axis over the whole figure, no frame and a 1:1 aspect ratio
    ax = fig.add_axes([0,0,1,1], frameon=False, aspect=1)
 
-   
+
 Next, we need to create several rings. For this, we can use the scatter plot
 object that is generally used to visualize points cloud, but we can also use it
 to draw rings by specifying we don't have a facecolor. We have also to take
@@ -583,8 +499,8 @@ transparent.
    n = 50
    size_min = 50
    size_max = 50*50
-          
-   # Ring position 
+
+   # Ring position
    P = np.random.uniform(0,1,(n,2))
 
    # Ring colors
@@ -611,7 +527,7 @@ remove the largest ring but re-use it to set a new ring at a new random
 position, with nominal size and color. Hence, we keep the number of ring
 constant.
 
-  
+
 .. image:: figures/rain.gif
    :target: scripts/rain-dynamic.py
    :align: right
@@ -652,8 +568,8 @@ the animation and display the result or save it as a movie:
    # animation.save('rain.gif', writer='imagemagick', fps=30, dpi=40)
    plt.show()
 
-   
-   
+
+
 Earthquakes
 -----------
 
@@ -678,7 +594,7 @@ whose content is given by the first line::
 
 We are only interested in latitude, longitude and magnitude and we won't parse
 time of event (ok, that's bad, feel free to send me a PR).
-  
+
 
 .. code:: python
 
@@ -719,7 +635,7 @@ more complete `cartopy <http://scitools.org.uk/cartopy/>`_) that is really
 simple to install and to use. First step is to define a projection to draw the
 earth onto a screen (there exists many different projections) and we'll stick
 to the `mill` projection which is rather standard for non-specialist like me.
-       
+
 
 .. code:: python
 
@@ -732,7 +648,7 @@ to the `mill` projection which is rather standard for non-specialist like me.
 Next, we request to draw coastline and fill continents:
 
 .. code:: python
-          
+
    earth.drawcoastlines(color='0.50', linewidth=0.25)
    earth.fillcontinents(color='0.95')
 
@@ -772,7 +688,7 @@ put some eye candy:
        scat.set_offsets(P['position'])
        return scat,
 
-       
+
    animation = FuncAnimation(fig, update, interval=10)
    plt.show()
 
@@ -783,7 +699,7 @@ If everything went well, you should obtain something like this (with animation):
    :target: scripts/earthquakes.py
    :width: 50%
 
-   
+
 Other Types of Plots
 ====================
 
@@ -938,7 +854,7 @@ Contour Plots
    command.
 
 Starting from the code below, try to reproduce the graphic on the right taking
-care of the colormap (see `Colormaps`_ below). 
+care of the colormap (see `Colormaps`_ below).
 
 ::
 
@@ -1198,7 +1114,7 @@ Click on figure for solution.
 Beyond this tutorial
 ====================
 
-Matplotlib benefits from extensive documentation as well as a large
+Matplotlib benefits from extensive 文档 as well as a large
 community of users and developpers. Here are some links of interest:
 
 Tutorials
@@ -1210,14 +1126,14 @@ Tutorials
   - Controlling line properties
   - Working with multiple figures and axes
   - Working with text
-  - 
+  -
 
 * `Image tutorial <http://matplotlib.sourceforge.net/users/image_tutorial.html>`_
 
   - Startup commands
   - Importing image data into Numpy arrays
   - Plotting numpy arrays as images
-  - 
+  -
 
 * `Text tutorial <http://matplotlib.sourceforge.net/users/index_text.html>`_
 
@@ -1227,7 +1143,7 @@ Tutorials
   - Writing mathematical expressions
   - Text rendering With LaTeX
   - Annotating text
-  - 
+  -
 
 * `Artist tutorial <http://matplotlib.sourceforge.net/users/artists.html>`_
 
@@ -1238,14 +1154,14 @@ Tutorials
   - Axes container
   - Axis containers
   - Tick containers
-  - 
+  -
 
 * `Path tutorial <http://matplotlib.sourceforge.net/users/path_tutorial.html>`_
 
   - Introduction
   - Bézier example
   - Compound paths
-  - 
+  -
 
 * `Transforms tutorial <http://matplotlib.sourceforge.net/users/transforms_tutorial.html>`_
 
@@ -1255,11 +1171,11 @@ Tutorials
   - Blended transformations
   - Using offset transforms to create a shadow effect
   - The transformation pipeline
-  - 
+  -
 
 
 
-Matplotlib documentation
+Matplotlib 文档
 ------------------------
 
 * `User guide <http://matplotlib.sourceforge.net/users/index.html>`_
@@ -1271,12 +1187,12 @@ Matplotlib documentation
   - How-To
   - Troubleshooting
   - Environment Variables
-  - 
+  -
 
 * `Screenshots <http://matplotlib.sourceforge.net/users/screenshots.html>`_
 
 
-Code documentation
+Code 文档
 ------------------
 
 The code is fairly well documented and you can quickly access a specific
@@ -1294,12 +1210,12 @@ command from within a python session:
       argument, allowing for multiple *x*, *y* pairs with an
       optional format string.  For example, each of the following is
       legal::
-    
+
           plot(x, y)         # plot x and y using default line style and color
           plot(x, y, 'bo')   # plot x and y using blue circle markers
           plot(y)            # plot y using x as index array 0..N-1
           plot(y, 'r+')      # ditto, but with red plusses
-    
+
       If *x* and/or *y* is 2-dimensional, then the corresponding columns
       will be plotted.
       ...
@@ -1434,7 +1350,7 @@ Line styles
    * - ``,``
      - pixels
      - .. image:: figures/linestyle-,.png
-     
+
    * - ``o``
      - circle
      - .. image:: figures/linestyle-o.png
