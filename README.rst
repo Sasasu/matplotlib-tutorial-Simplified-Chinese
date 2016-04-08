@@ -39,7 +39,7 @@ Matplotlib大概是最常用的Pyrhon 2D绘图库。它提供从Python和其他�
 IPython 和 pylab 模式
 --------------------------
 
-`IPython <http://ipython.org/>`_是一个增强的Python交互式shell,它有很多有趣的功能,包括命名输入和输出,访问shell命令,改进的调试方式和许多其他的功能。当我们使用参数 `-pylab` (IPython版本大于0.12时请使用 `--pylab` )启动后，它将允许与matplotlib会话交互并提供类似Matlab/Mathematica的功能
+`IPython <http://ipython.org/>`_ 是一个增强的Python交互式shell,它有很多有趣的功能,包括命名输入和输出,访问shell命令,改进的调试方式和许多其他的功能。当我们使用参数 `-pylab` (IPython版本大于0.12时请使用 `--pylab` )启动后，它将允许与matplotlib会话交互并提供类似Matlab/Mathematica的功能
 
 pyplot
 ------
