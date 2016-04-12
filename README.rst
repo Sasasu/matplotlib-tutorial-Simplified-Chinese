@@ -72,7 +72,7 @@ C 是 cosine 函数(256个变量)，S是 sine 函数(256个变量)。
 
 你可以点击每一步对应的图像来获取代码。
 
-使用默认的参数
+使用默认的参数来画图
 --------------
 
 .. admonition:: 文档
@@ -105,7 +105,7 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
    :target: scripts/exercice_2.py
 
 
-在下面的脚本中,我们将实例化(并介绍)所有影响图外观的参数。这些参数被显式的设定成初始值，但你现在可以交互式的改变这些参数并观察它们起得作用。(参见下面的 `线属性` 和 `线风格`)。
+在下面的脚本中,我们将介绍所有影响图外观的参数。这些参数被显式的设定成初始值，但你现在可以交互式的改变这些参数并观察它们起得作用。(参见下面的 `线属性` 和 `线风格`)。
 
 .. include:: scripts/exercice_2.py
    :code: python
@@ -128,11 +128,9 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
 
 ::
 
-   ...
    plt.figure(figsize=(10,6), dpi=80)
    plt.plot(X, C, color="blue", linewidth=2.5, linestyle="-")
    plt.plot(X, S, color="red",  linewidth=2.5, linestyle="-")
-   ...
 
 
 
@@ -152,11 +150,8 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
 当前的上下界对于这张图来说有点太小了，我们把他弄大点来看清楚所有的数据点。
 ::
 
-   ...
    plt.xlim(X.min()*1.1, X.max()*1.1)
    plt.ylim(C.min()*1.1, C.max()*1.1)
-   ...
-
 
 
 设置坐标轴单位长度
@@ -177,10 +172,8 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
 当前的坐标轴并不理想，因为他们不为sine和cosine显示有意义的值(+/-π,+/-π/2)，我们将改变它们，让它们只显示这些值。
 ::
 
-   ...
    plt.xticks( [-np.pi, -np.pi/2, 0, np.pi/2, np.pi])
    plt.yticks([-1, 0, +1])
-   ...
 
 
 
@@ -194,7 +187,7 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
    * `yticks() command <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.yticks>`_
    * `set_xticklabels() <http://matplotlib.sourceforge.net/api/axes_api.html?#matplotlib.axes.Axes.set_xticklabels>`_
    * `set_yticklabels() <http://matplotlib.sourceforge.net/api/axes_api.html?#matplotlib.axes.Axes.set_yticklabels>`_
-   
+
 
 .. image:: figures/exercice_6.png
    :align: right
@@ -204,13 +197,11 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
 
 ::
 
-   ...
    plt.xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi],
           [r'$-\pi$', r'$-\pi/2$', r'$0$', r'$+\pi/2$', r'$+\pi$'])
 
    plt.yticks([-1, 0, +1],
           [r'$-1$', r'$0$', r'$+1$'])
-   ...
 
 
 
@@ -231,7 +222,6 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
 
 ::
 
-   ...
    ax = plt.gca()
    ax.spines['right'].set_color('none')
    ax.spines['top'].set_color('none')
@@ -239,7 +229,6 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
    ax.spines['bottom'].set_position(('data',0))
    ax.yaxis.set_ticks_position('left')
    ax.spines['left'].set_position(('data',0))
-   ...
 
 
 
@@ -261,12 +250,10 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
 
 ::
 
-   ...
    plt.plot(X, C, color="blue", linewidth=2.5, linestyle="-", label="cosine")
    plt.plot(X, S, color="red",  linewidth=2.5, linestyle="-", label="sine")
 
    plt.legend(loc='upper left', frameon=False)
-   ...
 
 
 
@@ -286,8 +273,6 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
 
 ::
 
-   ...
-
    t = 2*np.pi/3
    plt.plot([t,t],[0,np.cos(t)], color ='blue', linewidth=2.5, linestyle="--")
    plt.scatter([t,],[np.cos(t),], 50, color ='blue')
@@ -304,8 +289,6 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
                 xy=(t, np.cos(t)), xycoords='data',
                 xytext=(-90, -50), textcoords='offset points', fontsize=16,
                 arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"))
-   ...
-
 
 
 恶魔藏在细节中(Devil is in the details)
@@ -324,11 +307,9 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
 
 ::
 
-   ...
    for label in ax.get_xticklabels() + ax.get_yticklabels():
        label.set_fontsize(16)
        label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.65 ))
-   ...
 
 
 
@@ -344,7 +325,7 @@ Figures
 figure是一个有着“Figure #”的GUI窗口。figures从1开始编号，而不是像Python一样从0开始。这正式MATLAB风格。这是几个确定figure的样子的参数
 
 ==============  ======================= ============================================
-参数               默认值                     解释
+参数             默认值                   解释
 ==============  ======================= ============================================
 num             1                       figure的编号
 figsize         figure.figsize          figure的大小(宽，高，单位英尺)
@@ -442,7 +423,6 @@ tick定位器(Tick Locators)
 
        .. image:: figures/ticks-LogLocator.png
 
-所有这些定位器从基类派生matplotlib.ticker.Locator。你可以让你自己的定位源于它。处理日期蜱虫可能特别棘手。因此,在matplotlib.dates matplotlib提供特殊的定位器。
 所有的定位器都是从基类matplotlib.ticker.Locator派生。你可以自己制作定位器。使用ticker来处理日期数据可能尤为棘手。因此，matplotlib在matplotlib.dates里提供特殊的定位器。
 
 Animation
@@ -454,21 +434,15 @@ Animation
 
    *  See `Animation <http://matplotlib.org/api/animation_api.html>`_
 
-The most easy way to make an animation in matplotlib is to declare a
-FuncAnimation object that specifies to matplotlib what is the figure to
-update, what is the update function and what is the delay between frames.
+在matolotlib中制作动画的最简单的方法是声明一个FuncAnimation对象，FuncAnimation对象可以告知matplotlib那个数字或那个函数需要更新，使用什么函数来更新和每个帧之间的间隔。
 
-
-Drip drop
+雨滴
 ---------
 
-A very simple rain effect can be obtained by having small growing rings
-randomly positioned over a figure. Of course, they won't grow forever since the
-wave is supposed to damp with time. To simulate that, we can use a more and
-more transparent color as the ring is growing, up to the point where it is no
-more visible. At this point, we remove the ring and create a new one.
+这是一个非常简单的雨滴效果，它可以通过把一个正在长大的小环通过一个随机数放在figure上获得。当然，它们不会一支生长，因为波的生存时间是有限的。为了模拟这一点，随着环的增长，我们可以使用一个越来越透明的颜色，知道这个环变得不可以看见。当环不可见时我们便删除这个环之后创建一个新的。
 
-First step is to create a blank figure:
+
+第一步是创建一个空白figure:
 
 .. code:: python
 
@@ -479,12 +453,12 @@ First step is to create a blank figure:
    ax = fig.add_axes([0,0,1,1], frameon=False, aspect=1)
 
 
-Next, we need to create several rings. For this, we can use the scatter plot
-object that is generally used to visualize points cloud, but we can also use it
-to draw rings by specifying we don't have a facecolor. We have also to take
-care of initial size and color for each ring such that we have all size between
-a minimum and a maximum size and also to make sure the largest ring is almost
-transparent.
+Next, we need to create several rings. For this, we can use the scatter plot object that is generally used to visualize points cloud, but we can also use it to draw rings by specifying we don't have a facecolor.
+We have also to take care of initial size and color for each ring such that we have all size between a minimum and a maximum size and also to make sure the largest ring is  lmost transparent.
+接下来，我们需要创建几个环。为此，我们可以使用散点图的应用，通常用于可视化的点云，但我们也可以用它来绘制环通过指定我们没有facecolor。
+我们还为每个环等，我们有一个最小值与最大值的大小和之间的所有尺寸以确保最大的环是几乎透明的照顾的初始大小和颜色。
+
+接下来，我们需要创建几个环，为此，我们可以使用散点图(scatter plot)。散点图通常用于可视化大量的点，但我们也可以使用它来画我们的水滴，只要我们指明说不需要背景色(facecolors).我们还需要注意每个环的初始大小和颜色，这样所有的大小
 
 
 .. image:: figures/rain-static.png
