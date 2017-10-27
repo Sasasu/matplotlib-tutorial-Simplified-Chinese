@@ -454,8 +454,8 @@ Animation
    ax = fig.add_axes([0,0,1,1], frameon=False, aspect=1)
 
 
-Next, we need to create several rings. For this, we can use the scatter plot object that is generally used to visualize points cloud, but we can also use it to draw rings by specifying we don't have a facecolor.
-We have also to take care of initial size and color for each ring such that we have all size between a minimum and a maximum size and also to make sure the largest ring is  lmost transparent.
+下一步，我们需要创建许多环。我们可以使用散点图对象来完成这个。散点图经常用来可视化点云，但我们可以用它来画环，只要不指定 facecolors 。
+同时，我们需要注意初始化每一个环的大小和颜色。保证环的大小在允许范围内，并确定大的环几乎是透明的。
 
 
 .. image:: figures/rain-static.png
@@ -490,12 +490,7 @@ We have also to take care of initial size and color for each ring such that we h
    ax.set_ylim(0,1), ax.set_yticks([])
 
 
-Now, we need to write the update function for our animation. We know that at
-each time step each ring should grow be more transparent while largest ring
-should be totally transparent and thus removed. Of course, we won't actually
-remove the largest ring but re-use it to set a new ring at a new random
-position, with nominal size and color. Hence, we keep the number of ring
-constant.
+现在我们需要为了动画写出更新函数。我们已经知道每一帧后环应该会更大、更透明，到达最大值的环应该完全透明并被删除。当然，我们并不是真正删除环，我们只是重新调整环的大小，让它成为一个新环，并用正常的大小和透明度放置它。也就是我们保证环数量不变。
 
 
 .. image:: figures/rain.gif
@@ -528,9 +523,7 @@ constant.
        # Return the modified object
        return scat,
 
-Last step is to tell matplotlib to use this function as an update function for
-the animation and display the result or save it as a movie:
-
+最后一部是告诉 matplotlib 使用这个函数作为动画的更新函数并显示结果或者保存：
 
 .. code:: python
 
@@ -540,31 +533,20 @@ the animation and display the result or save it as a movie:
 
 
 
-Earthquakes
+地震图
 -----------
 
-We'll now use the rain animation to visualize earthquakes on the planet from
-the last 30 days. The USGS Earthquake Hazards Program is part of the National
-Earthquake Hazards Reduction Program (NEHRP) and provides several data on their
-`website <http://earthquake.usgs.gov>`_. Those data are sorted according to
-earthquakes magnitude, ranging from significant only down to all earthquakes,
-major or minor. You would be surprised by the number of minor earthquakes
-happening every hour on the planet. Since this would represent too much data
-for us, we'll stick to earthquakes with magnitude > 4.5. At the time of writing,
-this already represent more than 300 earthquakes in the last 30 days.
+我们将要使用刚刚的下雨动画来可视化最近 30 天的地震。美国地质调查局的地震灾害项目是国家地震灾害减少计划（NEHRP）的一部分，并且它提供了一些数据在它的`网站 <http://earthquake.usgs.gov>`_。这些数据根据地震的等级从大到小排序。你会感到惊讶：地球每小时都在发生小地震。这意味着有太多的说数据了，所有我们只选取大于 4.5 级的地址。在编写本文时已经有了多余 300 次地震在上个月。
 
+第一步是读取并转换数据。我们使用 `urllib` 来打开并读取远程数据，数据使用 `CSV` 格式保存在网站上，看起来想这样。
 
-First step is to read and convert data. We'll use the `urllib` library that
-allows to open and read remote data. Data on the website use the `CSV` format
-whose content is given by the first line::
+::
 
   time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,type
   2015-08-17T13:49:17.320Z,37.8365,-122.2321667,4.82,4.01,mw,...
   2015-08-15T07:47:06.640Z,-10.9045,163.8766,6.35,6.6,mwp,...
 
-We are only interested in latitude, longitude and magnitude and we won't parse
-time of event (ok, that's bad, feel free to send me a PR).
-
+我们只关注维度（latitude），精度（longitude）和震级（magnitude）我们不关注时间或者其他的（我知道这很坏，请给我发 PR）
 
 .. code:: python
 
@@ -597,16 +579,7 @@ time of event (ok, that's bad, feel free to send me a PR).
        E['position'][i] = float(row[2]),float(row[1])
        E['magnitude'][i] = float(row[4])
 
-
-Now, we need to draw earth on a figure to show precisely where the earthquake
-center is and to translate latitude/longitude in some coordinates matplotlib
-can handle. Fortunately, there is the `basemap
-<http://matplotlib.org/basemap/>`_ project (that tends to be replaced by the
-more complete `cartopy <http://scitools.org.uk/cartopy/>`_) that is really
-simple to install and to use. First step is to define a projection to draw the
-earth onto a screen (there exists many different projections) and we'll stick
-to the `mill` projection which is rather standard for non-specialist like me.
-
+现在我们需要在 figure 上画出地球来精确的显示震中并转换精度维度为坐标来让 matplotlib 处理，幸运的是有 `basemap<http://matplotlib.org/basemap/>`_ 来帮忙（也可以用更完整的 `cartopy <http://scitools.org.uk/cartopy/>`_ 来取代）。它十分容易安装和使用。第一步是定义一个投影来画出地球（有许多不同的投影）。对于像我们这样非专业人士来说应该使用 `mill` 投影。
 
 .. code:: python
 
@@ -615,18 +588,14 @@ to the `mill` projection which is rather standard for non-specialist like me.
 
    earth = Basemap(projection='mill')
 
-
-Next, we request to draw coastline and fill continents:
+接下来，我们来绘制海岸线和填充大陆：
 
 .. code:: python
 
    earth.drawcoastlines(color='0.50', linewidth=0.25)
    earth.fillcontinents(color='0.95')
 
-The `earth` object will also be used to translate coordinate quite
-automatically. We are almost finished. Last step is to adapt the rain code and
-put some eye candy:
-
+`earth` 对象也可以用来自动翻译坐标，我们已经快完工了。最后一部是修改雨滴代码并让它更好看。
 
 .. code:: python
 
@@ -664,14 +633,14 @@ put some eye candy:
    plt.show()
 
 
-If everything went well, you should obtain something like this (with animation):
+如果一切顺利，你应该得到这样的东西：
 
 .. image:: figures/earthquakes.png
    :target: scripts/earthquakes.py
    :width: 50%
 
 
-Other Types of Plots
+其他的 Plots 类型
 ====================
 
 .. image:: figures/plot.png
@@ -711,21 +680,20 @@ Other Types of Plots
    :target: `Text`_
 
 
-Regular Plots
+周期 Plots
 -------------
 
 .. image:: figures/plot_ex.png
    :align: right
    :target: scripts/plot_ex.py
 
-.. admonition:: Hints
+.. admonition:: 提示
 
-   You need to use the `fill_between
-   <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.fill_between>`_
-   command.
+   你需要看 `fill_between<http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.fill_between>`_ 指令.
 
-Starting from the code below, try to reproduce the graphic on the right taking
-care of filled areas::
+从下面的代码开始，尝试重现右边的图形，注意填充区域。
+
+::
 
    import numpy as np
    import matplotlib.pyplot as plt
@@ -738,24 +706,22 @@ care of filled areas::
    plt.plot (X, Y-1, color='blue', alpha=1.00)
    plt.show()
 
-Click on figure for solution.
+点击图片获取答案。
 
 
 
-Scatter Plots
+分散 Plots
 -------------
 
 .. image:: figures/scatter_ex.png
    :align: right
    :target: scripts/scatter_ex.py
 
-.. admonition:: Hints
+.. admonition:: 提示
 
-   Color is given by angle of (X,Y).
+   颜色由（X，Y）的角度给出。
 
-
-Starting from the code below, try to reproduce the graphic on the right taking
-care of marker size, color and transparency.
+从下面的代码开始，尝试重现右侧的图形，注意点的大小，颜色和透明度。
 
 ::
 
@@ -769,7 +735,7 @@ care of marker size, color and transparency.
    plt.scatter(X,Y)
    plt.show()
 
-Click on figure for solution.
+点击图片获取答案。
 
 
 
@@ -781,13 +747,12 @@ Bar Plots
    :align: right
    :target: scripts/bar_ex.py
 
-.. admonition:: Hints
+.. admonition:: 提示
 
-   You need to take care of text alignment.
+   你需要注意文本对齐。
 
 
-Starting from the code below, try to reproduce the graphic on the right by
-adding labels for red bars.
+从下面的代码开始， 尝试通过给红 bars 添加 label 来复现右边的图片。
 
 ::
 
@@ -808,24 +773,21 @@ adding labels for red bars.
    plt.ylim(-1.25,+1.25)
    plt.show()
 
-Click on figure for solution.
+点击图片获取答案。
 
 
-Contour Plots
+轮廓 Plots
 -------------
 
 .. image:: figures/contour_ex.png
    :align: right
    :target: scripts/contour_ex.py
 
-.. admonition:: Hints
+.. admonition:: 提示
 
-   You need to use the `clabel
-   <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.clabel>`_
-   command.
+   你可以使用 `clabel <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.clabel>`_ 指令。
 
-Starting from the code below, try to reproduce the graphic on the right taking
-care of the colormap (see `Colormaps`_ below).
+从下面的代码开始， 尝试复现右边的图片 taking 注意 colormap (见下 `Colormaps`_).
 
 ::
 
@@ -843,7 +805,7 @@ care of the colormap (see `Colormaps`_ below).
    C = plt.contour(X, Y, f(X,Y), 8, colors='black', linewidth=.5)
    plt.show()
 
-Click on figure for solution.
+点击图片获取答案。
 
 
 
@@ -854,15 +816,12 @@ Imshow
    :align: right
    :target: scripts/imshow_ex.py
 
-.. admonition:: Hints
+.. admonition:: 提示
 
-   You need to take care of the ``origin`` of the image in the imshow command and
-   use a `colorbar
-   <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.colorbar>`_
+   你需要注意在 imshow 中的 ``原始`` 图像，并使用 `colorbar <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.colorbar>`_
 
 
-Starting from the code below, try to reproduce the graphic on the right taking
-care of colormap, image interpolation and origin.
+从下面的代码开始， 尝试复现右边的图片注意照顾色差，图像插值和原点。
 
 ::
 
@@ -878,7 +837,7 @@ care of colormap, image interpolation and origin.
    plt.imshow(f(X,Y))
    plt.show()
 
-Click on figure for solution.
+点击图片获取答案。
 
 
 Pie Charts
@@ -888,12 +847,11 @@ Pie Charts
    :align: right
    :target: scripts/pie_ex.py
 
-.. admonition:: Hints
+.. admonition:: 提示
 
-   You need to modify Z.
+   你需要改变 Z
 
-Starting from the code below, try to reproduce the graphic on the right taking
-care of colors and slices size.
+从下面的代码开始， 尝试复现右边的图片注意颜色和切片大小。
 
 ::
 
@@ -905,7 +863,7 @@ care of colors and slices size.
    plt.pie(Z)
    plt.show()
 
-Click on figure for solution.
+点击图片获取答案。
 
 
 
@@ -916,12 +874,11 @@ Quiver Plots
    :align: right
    :target: scripts/quiver_ex.py
 
-.. admonition:: Hints
+.. admonition:: 提示
 
-   You need to draw arrows twice.
+   你需要把箭头画两次。
 
-Starting from the code above, try to reproduce the graphic on the right taking
-care of colors and orientations.
+从下面的代码开始，尝试复现右边的图片注意颜色和方向。
 
 ::
 
@@ -933,7 +890,7 @@ care of colors and orientations.
    plt.quiver(X,Y)
    plt.show()
 
-Click on figure for solution.
+点击图片获取答案。
 
 
 
@@ -945,8 +902,7 @@ Grids
    :target: scripts/grid_ex.py
 
 
-Starting from the code below, try to reproduce the graphic on the right taking
-care of line styles.
+从下面的代码开始， 尝试复现右边的图片注意线的风格。
 
 ::
 
@@ -961,7 +917,7 @@ care of line styles.
 
    plt.show()
 
-Click on figure for solution.
+点击图片获取答案。
 
 
 Multi Plots
@@ -971,12 +927,12 @@ Multi Plots
    :align: right
    :target: scripts/multiplot_ex.py
 
-.. admonition:: Hints
+.. admonition:: 提示
 
-   You can use several subplots with different partition.
+    你可以使用多个 subplot 
 
 
-Starting from the code below, try to reproduce the graphic on the right.
+从下面的代码开始， 尝试复现右边的图片.
 
 ::
 
@@ -989,7 +945,7 @@ Starting from the code below, try to reproduce the graphic on the right.
 
    plt.show()
 
-Click on figure for solution.
+点击图片获取答案。
 
 
 Polar Axis
@@ -999,12 +955,12 @@ Polar Axis
    :align: right
    :target: scripts/polar_ex.py
 
-.. admonition:: Hints
+.. admonition:: 提示
 
-   You only need to modify the ``axes`` line
+   你需要更改 ``axes`` 线
 
 
-Starting from the code below, try to reproduce the graphic on the right.
+从下面的代码开始， 尝试复现右边的图片.
 
 ::
 
@@ -1025,7 +981,7 @@ Starting from the code below, try to reproduce the graphic on the right.
 
    plt.show()
 
-Click on figure for solution.
+点击图片获取答案。
 
 
 3D Plots
@@ -1035,13 +991,12 @@ Click on figure for solution.
    :align: right
    :target: scripts/plot3d_ex.py
 
-.. admonition:: Hints
+.. admonition:: 提示
 
-   You need to use `contourf
-   <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.contourf>`_
+   你需要使用 `contourf<http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.contourf>`_
 
 
-Starting from the code below, try to reproduce the graphic on the right.
+从下面的代码开始， 尝试复现右边的图片.
 
 ::
 
@@ -1061,7 +1016,7 @@ Starting from the code below, try to reproduce the graphic on the right.
 
    plt.show()
 
-Click on figure for solution.
+点击图片获取答案。
 
 
 
@@ -1072,23 +1027,21 @@ Text
   :align: right
   :target: scripts/text_ex.py
 
-.. admonition:: Hints
+.. admonition:: 提示
 
-   Have a look at the `matplotlib logo
-   <http://matplotlib.sourceforge.net/examples/api/logo2.html>`_.
+   看一眼 `matplotlib logo<http://matplotlib.sourceforge.net/examples/api/logo2.html>`_.
 
-Try to do the same from scratch !
+尝试从头开始做同样的事情！
 
-Click on figure for solution.
+点击图片获取答案。
 
 
-Beyond this tutorial
+在本教程之外
 ====================
 
-Matplotlib benefits from extensive 文档 as well as a large
-community of users and developpers. Here are some links of interest:
-
+Matplotlib 有着大量的文档和巨大的开发者和用户社区，这是一些可能感兴趣的链接：
 Tutorials
+
 ---------
 
 * `Pyplot tutorial <http://matplotlib.sourceforge.net/users/pyplot_tutorial.html>`_
@@ -1163,11 +1116,10 @@ Matplotlib 文档
 * `Screenshots <http://matplotlib.sourceforge.net/users/screenshots.html>`_
 
 
-Code 文档
+Code documented
 ------------------
 
-The code is fairly well documented and you can quickly access a specific
-command from within a python session:
+代码已经被相当好的注解，您可以从 python 中快速访问特定的命令的文档：
 
 ::
 
@@ -1194,28 +1146,23 @@ command from within a python session:
 Galleries
 ---------
 
-The `matplotlib gallery <http://matplotlib.sourceforge.net/gallery.html>`_ is
-also incredibly useful when you search how to render a given graphic. Each
-example comes with its source.
+`matplotlib gallery <http://matplotlib.sourceforge.net/gallery.html>`_ 十分有用当你想要知道如何画一副图时，每一个例子都有代码。
 
-A smaller gallery is also available `here <http://www.loria.fr/~rougier/coding/gallery/>`_.
+一个小的仓库也可以在 `这里 <http://www.loria.fr/~rougier/coding/gallery/>`_ 找到 
 
 
-Mailing lists
+右键列表
 --------------
 
-Finally, there is a `user mailing list
-<https://mail.python.org/mailman/listinfo/matplotlib-users>`_ where you can
-ask for help and a `developers mailing list
-<https://mail.python.org/mailman/listinfo/matplotlib-devel>`_ that is more
-technical.
+最后, 这里十一分 `用户邮件列表 <https://mail.python.org/mailman/listinfo/matplotlib-users>`_ 你可以在这寻找帮助。
+`开发者右键列表<https://mail.python.org/mailman/listinfo/matplotlib-devel>`_ 更技术一些。
 
 
 
-Quick references
+快速参考
 ================
 
-Here is a set of tables that show main properties and styles.
+这是一组显示主要属性和样式的表。
 
 Line properties
 ----------------
@@ -1545,11 +1492,9 @@ Markers
 Colormaps
 ---------
 
-All colormaps can be reversed by appending ``_r``. For instance, ``gray_r`` is
-the reverse of ``gray``.
+所有的色彩映射（colormaps）可以通过添加 ``_r`` 来反转。例如 ``gray_r`` 是 ``gray`` 的反转.
 
-If you want to know more about colormaps, checks `Documenting the matplotlib
-colormaps <https://gist.github.com/2719900>`_.
+如果你想知道更多关于 colormap 的 `Documenting the matplotlib colormaps <https://gist.github.com/2719900>`_.
 
 
 Base
