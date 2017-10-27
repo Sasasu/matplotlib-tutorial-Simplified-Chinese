@@ -7,7 +7,7 @@ Matplotlib 指南
 作者 Nicolas P. Rougier 翻译 Sasasu
 ------------------------------------------------
 
-.. image:: https://zenodo.org/badge/doi/10.5281/zenodo.28747.png
+.. image:: https://zenodo.org/badge/doi/10.5281/zenodo.28747.svg
    :target: http://dx.doi.org/10.5281/zenodo.28747
 
 .. contents:: Table of Contents
@@ -20,15 +20,17 @@ Matplotlib 指南
 所有的代码及素材遵守 `Creative Commons Attribution-ShareAlike 4.0 协议
 <http://creativecommons.org/licenses/by-sa/4.0>`_.
 
+You can test your installation before the tutorial using the `check-installation.py <scripts/check-installation.py>`_ script.
 
 本指南可在此处阅读 http://www.labri.fr/perso/nrougier/teaching/matplotlib/matplotlib.html
 
 请一定也读一下 `为了更好的设计而生的十个简单规则(英文) <http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833>`_, N.P. Rougier, M. Droettboom & P. Bourne, Plos Computational Biology 10(9): e1003833. doi:10.1371/journal.pcbi.1003833.
 
-
 另请参阅:
- * `Numpy tutorial <http://www.labri.fr/perso/nrougier/teaching/numpy/numpy.html>`_
- * `100 Numpy exercices <http://www.labri.fr/perso/nrougier/teaching/numpy.100/index.html>`_
+
+* `Numpy tutorial <http://www.labri.fr/perso/nrougier/teaching/numpy/numpy.html>`_
+* `100 Numpy exercices <http://www.labri.fr/perso/nrougier/teaching/numpy.100/index.html>`_
+* `Ten simple rules for better figures <http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833>`_
 
 
 简介
@@ -274,7 +276,7 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
 ::
 
    t = 2*np.pi/3
-   plt.plot([t,t],[0,np.cos(t)], color ='blue', linewidth=2.5, linestyle="--")
+   plt.plot([t,t],[0,np.cos(t)], color ='blue', linewidth=1.5, linestyle="--")
    plt.scatter([t,],[np.cos(t),], 50, color ='blue')
 
    plt.annotate(r'$\sin(\frac{2\pi}{3})=\frac{\sqrt{3}}{2}$',
@@ -282,7 +284,7 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
                 xytext=(+10, +30), textcoords='offset points', fontsize=16,
                 arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"))
 
-   plt.plot([t,t],[0,np.sin(t)], color ='red', linewidth=2.5, linestyle="--")
+   plt.plot([t,t],[0,np.sin(t)], color ='red', linewidth=1.5, linestyle="--")
    plt.scatter([t,],[np.sin(t),], 50, color ='red')
 
    plt.annotate(r'$\cos(\frac{2\pi}{3})=-\frac{1}{2}$',
@@ -578,19 +580,20 @@ time of event (ok, that's bad, feel free to send me a PR).
    feed = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/"
 
    # Significant earthquakes in the last 30 days
-   # url = urllib.urlopen(feed + "significant_month.csv")
+   # url = urllib.request.urlopen(feed + "significant_month.csv")
 
    # Magnitude > 4.5
-   url = urllib.urlopen(feed + "4.5_month.csv")
+   url = urllib.request.urlopen(feed + "4.5_month.csv")
 
    # Magnitude > 2.5
-   # url = urllib.urlopen(feed + "2.5_month.csv")
+   # url = urllib.request.urlopen(feed + "2.5_month.csv")
 
    # Magnitude > 1.0
-   # url = urllib.urlopen(feed + "1.0_month.csv")
+   # url = urllib.request.urlopen(feed + "1.0_month.csv")
 
    # Reading and storage of data
-   data = url.read().split('\n')[+1:-1]
+   data = url.read()
+   data = data.split(b'\n')[+1:-1]
    E = np.zeros(len(data), dtype=[('position',  float, 2),
                                   ('magnitude', float, 1)])
 
