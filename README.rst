@@ -20,7 +20,7 @@ Matplotlib 指南
 所有的代码及素材遵守 `Creative Commons Attribution-ShareAlike 4.0 协议
 <http://creativecommons.org/licenses/by-sa/4.0>`_.
 
-You can test your installation before the tutorial using the `check-installation.py <scripts/check-installation.py>`_ script.
+你使用这个脚本 `check-installation.py <scripts/check-installation.py>`_ 来测试 Matplotlib 是否安装成功。
 
 本指南可在此处阅读 http://www.labri.fr/perso/nrougier/teaching/matplotlib/matplotlib.html
 
@@ -36,24 +36,24 @@ You can test your installation before the tutorial using the `check-installation
 简介
 ============
 
-Matplotlib大概是最常用的Pyrhon 2D绘图库。它提供从Python和其他数据里快速创建可视化图像的方法。我们将要探索matplotlib在交互模式下的常见用法。
+Matplotlib 大概是最常用的 Pyrhon 2D 绘图库。它提供从 Python 和其他数据里快速创建可视化图像的方法。我们将要探索 matplotlib 在交互模式下的常见用法。
 
 IPython 和 pylab 模式
 --------------------------
 
-`IPython <http://ipython.org/>`_ 是一个增强的Python交互式shell,它有很多有趣的功能,包括命名输入和输出,访问shell命令,改进的调试方式和许多其他的功能。当我们使用参数 `-pylab` (IPython版本大于0.12时请使用 `--pylab` )启动后，它将允许与matplotlib会话交互并提供类似Matlab/Mathematica的功能
+`IPython <http://ipython.org/>`_ 是一个增强的 Python 交互式 shell，它有很多有趣的功能,包括命名输入和输出,访问 shell 命令,改进的调试方式和许多其他的功能。当我们使用参数 `-pylab` （IPython版本大于0.12时请使用 `--pylab`）启动后，它将允许与 matplotlib 会话交互并提供类似 Matlab/Mathematica 的功能。
 
 pyplot
 ------
 
-pyplot为matplotlib提供了一个方便的面向对象的绘图接口，它的风格非常像Matlab(TM)。此外大多数pyplot的绘图命令与Matlab(TM)有着类似的参数。重要的命令将会用交互式的例子介绍
+pyplot 为 matplotlib 提供了一个方便的面向对象的绘图接口，它的风格非常像 Matlab。此外大多数 pyplot 的绘图命令与 Matlab 有着类似的参数。本教程中重要的命令将会用交互式的例子介绍。
 
 
 简单的图像
 ===========
 
-在本章中我们将要在一个简单的画板上画一个cosine和sine函数。从默认的参数开始，我们将一步一步的完善它。
-第一步是从sine和cosine函数中获取数据：
+在本章中我们将要在一个简单的画板上画一个 cosine 和 sine 函数。从默认的参数开始，我们将一步一步的完善它。
+第一步是从 sine 和 cosine 函数中获取数据：
 
 ::
 
@@ -63,8 +63,8 @@ pyplot为matplotlib提供了一个方便的面向对象的绘图接口，它的�
    C,S = np.cos(X), np.sin(X)
 
 
-X 现在是有着256个变量，范围为从-π 到 +π(包含)的numpy数组。
-C 是 cosine 函数(256个变量)，S是 sine 函数(256个变量)。
+X 现在是有着 256 个变量，范围为从 -π 到 +π（包含）的 numpy 数组。
+C 是 cosine 函数（256个变量），S是 sine 函数（256个变量）。
 
 为了演示这个例子，你可以下载每一个例子并用如下命令运行他
 
@@ -87,7 +87,7 @@ C 是 cosine 函数(256个变量)，S是 sine 函数(256个变量)。
    :target: scripts/exercice_1.py
 
 
-Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控制几乎所有的属性，比如图的大小和dpi,线宽,颜色和风格,坐标轴和网格属性,文本和字体属性等等。虽然matplotlib的默认属性在大部分情况下是比较好的，但你也许为了一些特殊的场合改变某些参数。
+Matplotlib 附带了一组的默认设置,允许定制各种属性。您可以控制几乎所有的属性，比如图的大小和 dpi，线宽，颜色和风格，坐标轴和网格属性，文本和字体属性等等。虽然 matplotlib 的默认属性在大部分情况下是比较好的，但你也许为了一些特殊的场合改变某些参数。
 
 
 .. include:: scripts/exercice_1.py
@@ -107,7 +107,7 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
    :target: scripts/exercice_2.py
 
 
-在下面的脚本中,我们将介绍所有影响图外观的参数。这些参数被显式的设定成初始值，但你现在可以交互式的改变这些参数并观察它们起得作用。(参见下面的 `线属性` 和 `线风格`)。
+在下面的脚本中，我们将介绍所有影响图外观的参数。这些参数被显式的设定成初始值，但你现在可以交互的改变这些参数并观察它们起的作用。(参见下面的 `线属性` 和 `线风格`)。
 
 .. include:: scripts/exercice_2.py
    :code: python
@@ -126,7 +126,7 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
    :align: right
    :target: scripts/exercice_3.py
 
-第一步，我们想要让cosine是蓝色sine是红色，并用稍微粗点的线标出他们。 我们也会稍微改变图的大小,使之更水平(horizontal)。
+第一步，我们想要让 cosine 是蓝色 sine 是红色，并用稍微粗点的线标出他们。 我们也会稍微改变图的大小,使之更水平（horizontal）。
 
 ::
 
@@ -171,7 +171,7 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
    :align: right
    :target: scripts/exercice_5.py
 
-当前的坐标轴并不理想，因为他们不为sine和cosine显示有意义的值(+/-π,+/-π/2)，我们将改变它们，让它们只显示这些值。
+当前的坐标轴并不理想，因为他们不为 sine 和 cosine 显示有意义的值（+/-π,+/-π/2），我们将改变它们，让它们只显示这些值。
 ::
 
    plt.xticks( [-np.pi, -np.pi/2, 0, np.pi/2, np.pi])
@@ -195,7 +195,7 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
    :align: right
    :target: scripts/exercice_6.py
 
-现在坐标轴刻度被正确的设置了，但他们的单位并不是很明确。我们可以猜想3.142是π但让它直接显示π会更加明确。在我们设置坐标轴刻度时可以同时在第二个参数列表里提供对应的单位。注意：我们将使用LaTeX来更好的描述单位。
+现在坐标轴刻度被正确的设置了，但他们的单位并不是很明确。我们可以猜想 3.142 = π 但让它直接显示 π 会更加明确。在我们设置坐标轴刻度时可以在第二个参数列表里提供对应的单位。注意：我们将使用 LaTeX 来更好的描述单位。
 
 ::
 
@@ -220,7 +220,7 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
    :align: right
    :target: scripts/exercice_7.py
 
-脊(Spines)是连接轴刻度和提示边界的线。它们可以被放置在任意的位置，现在它们在边界上。我们将把它放到中心。因为有四个脊（顶部/底部/左边/右边），我们将通过设置颜色为"none"来隐藏他们，同时我们将移动底部和左边的两个到坐标为0的位置。
+脊（Spines）是连接轴刻度和提示边界的线。它们可以被放置在任意的位置，现在它们在边界上。我们将把它放到中心。因为有四个脊（顶部/底部/左边/右边），我们将通过设置颜色为 "none" 来隐藏他们，同时我们将移动底部和左边的两个到坐标为0的位置。
 
 ::
 
@@ -248,7 +248,7 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
    :align: right
    :target: scripts/exercice_8.py
 
-让我们在左上角添加图例。这止血药添加一个标签关键字(它在图例框中显示)到plot命令。
+让我们在左上角添加图例。这只需要添加一个标签关键字（它在图例框中显示）到 plot 命令。
 
 ::
 
@@ -271,7 +271,7 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
    :align: right
    :target: scripts/exercice_9.py
 
-让我们使用注解命令来注释一些有趣的点。我们选择2π/3，并想同时注释sine和cosine。我们首先在曲线上做一些标记并画一条虚线。然后使用注释命令来显示一些文本和箭头。
+让我们使用注解命令来注释一些有趣的点。我们选择 2π/3，并想同时注释 sine 和 cosine 。我们首先在曲线上做一些标记并画一条虚线。然后使用注释命令来显示一些文本和箭头。
 
 ::
 
@@ -316,15 +316,15 @@ Matplotlib附带了一组的默认设置,允许定制各种属性。您可以控
 
 
 
-图(Figures), (子坐标)Subplots, 轴(Axes) 和 Ticks
+图（Figures）, 子坐标（Subplots）, 轴(Axes) 和 Ticks
 ====================================================
 
-到目前为止，我们已经使用隐式图和轴的创建(implicit figure and axes creation)来快速的绘图，但我们能通过figure, subplot, 和 axes explicitly进一步控制绘图。figures 在matplotlib代表着用户界面里的整个窗口，figures 里可以有把其他坐标限定在常规坐标里的子坐标，轴可以在图中的任意位置。根据你的意图，这都是十分有用的。我们已经在没有正式称呼使用 figures 和 subplots 的情况下使用了他们。当我们调用plot,matplotlib会调用gca()来获取当前轴(axes)，同时gca调用gcf()来获取当前figure，如果没有figure，它便会调用figure()来创建一个，严格地说是创建一个subplot(111)。让我们来看看细节。
+到目前为止，我们已经使用隐式图和轴的创建（implicit figure and axes creation）来快速的绘图，但我们能通过 figure, subplot, 和 axes explicitly 进一步控制绘图。figures 在 matplotlib 代表着用户界面里的整个窗口，figures 里可以有把其他坐标限定在常规坐标里的子坐标，轴可以在图中的任意位置。根据你的意图，这都是十分有用的。我们已经在没有正式称呼使用 figures 和 subplots 的情况下使用了他们。当我们调用 plot，matplotlib 会调用 gca() 来获取当前轴（axes），同时 gca 调用 gcf() 来获取当前 figure，如果没有 figure，它便会调用 figure() 来创建一个，严格地说是创建一个 subplot。让我们来看看细节。
 
 Figures
 -------
 
-figure是一个有着“Figure #”的GUI窗口。figures从1开始编号，而不是像Python一样从0开始。这正式MATLAB风格。这是几个确定figure的样子的参数
+figure 是一个有着 “Figure #” 的GUI窗口。figures 从1开始编号，而不是像 Python 一样从0开始。这是 MATLAB 风格。这是几个确定 figure 的样子的参数
 
 ==============  ======================= ============================================
 参数             默认值                   解释
@@ -337,18 +337,17 @@ edgecolor       figure.edgecolor        边缘的颜色 background
 frameon         True                    是否有边界
 ==============  ======================= ============================================
 
-默认值可以在资源文件中指定，大部分时候都会使用默认值。只有figure的数量经常改变。
+默认值可以在配置文件中指定，大部分时候都会使用默认值。只有 figure 的数量经常改变。
 
-当你使用GUI可以关闭图通过点击右上角的x。但是你可以关闭图编程通过调用关闭。根据论证它关闭(1)当前图(无参数),(2)一个特定的图(图号或图实例作为参数),或(3)所有数据(所有作为参数)。
-当你使用GUI时你可以通过点击右上角X来关闭figure，但你也可以编程调用函数来关闭。这取决于closes的参数，closes()将会关闭当前figure,closes(#)将会关闭特定序号的figure,closes(all)将会关闭所有figure
+当你使用 GUI 可以关闭图通过点击右上角的 x 。但是你可以关闭图编程通过调用关闭。closes() 的行为取决于给定的参数，无参数时会关闭当前 figure，给定 figure 序号时会关闭特定的 figure，使用 all 作为参数时会关闭所有 figure。
 
-与其他对象一样,你可以设置图的属性与set_something方法。
+与其他对象一样,你可以设置图的属性与 set_something 方法。
 
 
 Subplots
 --------
 
-通过subplots，你可以把其他坐标限定在常规坐标里。你需要指定行数和列数，注意       `gridspec <http://matplotlib.sourceforge.net/users/gridspec.html>`_ 命令是一个更强大的候选
+通过 subplots ，你可以把其他坐标限定在常规坐标里。你需要指定行数和列数，注意 `gridspec <http://matplotlib.sourceforge.net/users/gridspec.html>`_ 命令是一个更强大的候选
 
 .. image:: figures/subplot-horizontal.png
    :target: scripts/subplot-horizontal.py
@@ -364,7 +363,7 @@ Subplots
 Axes
 ----
 
-axes非常类似于subplots，但axes允许把plots放置在figure的任何位置。所以如果我们想把一个小的坐标放在大坐标里，我们应该用axes
+axes 非常类似于 subplots，但 axes 允许把 plots 放置在 figure 的任何位置。所以如果我们想把一个小的坐标放在大坐标里，我们应该用 axes。
 
 .. image:: figures/axes.png
    :target: scripts/axes.py
@@ -375,9 +374,9 @@ axes非常类似于subplots，但axes允许把plots放置在figure的任何位�
 Ticks
 -----
 
-被良好格式化的坐标轴是准备发布(publishing-ready)的figures的重要的一部分。Matplotlib为坐标轴提供了一个完全可配置的系统。tick定位器(tick locators)是用来指定ticks应该在哪里出现，tick格式化器(tick formatters)则是让ticks拥有你希望的外观。主要和次要的ticks可以单独指定位置和格式化。每一个默认的次要ticks不会被显示，即使只有一个空的列表，因为他们是NullLocator(见下文)
+被良好格式化的坐标轴是准备发布（publishing-ready）的 figures 的重要的一部分。Matplotlib 为坐标轴提供了一个完全可配置的系统。tick 定位器（tick locators）是用来指定ticks 应该在哪里出现，tick 格式化器（tick formatters）则是让 ticks 拥有你希望的外观。主要和次要的 ticks 可以单独指定位置和格式化。每个默认的次要 ticks 不会被显示，也就是说那里只会显示一个空的列表，因为它是 NullLocator（见下文）。
 
-tick定位器(Tick Locators)
+Tick 定位器（Tick Locators）
 ..........................
 
 这是为了应对不同需求的几种定位器:
@@ -425,23 +424,23 @@ tick定位器(Tick Locators)
 
        .. image:: figures/ticks-LogLocator.png
 
-所有的定位器都是从基类matplotlib.ticker.Locator派生。你可以自己制作定位器。使用ticker来处理日期数据可能尤为棘手。因此，matplotlib在matplotlib.dates里提供特殊的定位器。
+所有的定位器都是从基类 matplotlib.ticker.Locator 派生。你可以自己制作定位器。使用 ticker 来处理日期数据可能尤为棘手。因此，matplotlib 在 matplotlib.dates 里提供特殊的定位器。
 
 Animation
 =========
 
-在很长的一段时间里，动画在matplotlib并不是一件容易的事，完成动画需要高超的hacks技巧。但1.1版本提供了一些工具来使创造动画变得非常直观。现在能以各种方式来保存动画(但不要指望以60fps来运行非常复杂的动画)
+在很长的一段时间里，动画在 matplotlib 并不是一件容易的事，完成动画需要高超的 hack 技巧。但 1.1 版本提供了一些工具来使创造动画变得非常直观。现在能以各种方式来保存动画（但不要指望以60fps来运行非常复杂的动画）
 
 .. admonition:: 文档
 
    *  See `Animation <http://matplotlib.org/api/animation_api.html>`_
 
-在matolotlib中制作动画的最简单的方法是声明一个FuncAnimation对象，FuncAnimation对象可以告知matplotlib那个数字或那个函数需要更新，使用什么函数来更新和每个帧之间的间隔。
+在 matolotlib 中制作动画的最简单的方法是声明一个 FuncAnimation 对象，FuncAnimation 对象可以告知 matplotlib 哪个数字或哪个函数需要更新、使用什么函数来更新和每个帧之间的间隔。
 
 雨滴
 ---------
 
-这是一个非常简单的雨滴效果，它可以通过把一个正在长大的小环通过一个随机数放在figure上获得。当然，它们不会一支生长，因为波的生存时间是有限的。为了模拟这一点，随着环的增长，我们可以使用一个越来越透明的颜色，知道这个环变得不可以看见。当环不可见时我们便删除这个环之后创建一个新的。
+这是一个非常简单的雨滴效果，它可以通过把一个正在长大的小环通过一个随机数放在 figure 上获得。当然，它们不会一直生长，因为波的生存时间是有限的。为了模拟这一点，随着环的增长，我们可以使用一个越来越透明的颜色，直到这个环变得不可以看见。当环不可见时我们便删除这个环并创建一个新的。
 
 
 第一步是创建一个空白figure:
@@ -457,10 +456,6 @@ Animation
 
 Next, we need to create several rings. For this, we can use the scatter plot object that is generally used to visualize points cloud, but we can also use it to draw rings by specifying we don't have a facecolor.
 We have also to take care of initial size and color for each ring such that we have all size between a minimum and a maximum size and also to make sure the largest ring is  lmost transparent.
-接下来，我们需要创建几个环。为此，我们可以使用散点图的应用，通常用于可视化的点云，但我们也可以用它来绘制环通过指定我们没有facecolor。
-我们还为每个环等，我们有一个最小值与最大值的大小和之间的所有尺寸以确保最大的环是几乎透明的照顾的初始大小和颜色。
-
-接下来，我们需要创建几个环，为此，我们可以使用散点图(scatter plot)。散点图通常用于可视化大量的点，但我们也可以使用它来画我们的水滴，只要我们指明说不需要背景色(facecolors).我们还需要注意每个环的初始大小和颜色，这样所有的大小
 
 
 .. image:: figures/rain-static.png
